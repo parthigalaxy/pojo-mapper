@@ -1,0 +1,15 @@
+package com.java.examples.annotation.mapper;
+
+import com.java.examples.annotation.mapper.destination.MyCarModel;
+import com.java.examples.annotation.mapper.source.CarModel;
+import com.java.examples.annotation.types.Mapper;
+
+public interface CarMapper {
+	
+	@Mapper
+	MyCarModel mapCarModelToMyCarModel(CarModel carModel);
+	
+	//@Mapper
+	//CarModel mapMyCarModelToCarModel(MyCarModel myCarModel);
+
+}

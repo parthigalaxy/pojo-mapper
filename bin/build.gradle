@@ -1,0 +1,66 @@
+plugins {
+	id 'java'
+}
+apply plugin: "maven-publish"
+apply plugin: "idea"
+
+group = 'com.tracker'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
+
+allprojects {
+    repositories {
+        mavenLocal()
+    }
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+dependencies {
+
+	implementation 'com.squareup:javapoet:1.13.0'
+	implementation 'org.apache.commons:commons-lang3:3.14.0'
+	implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.13'
+
+    implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
+	annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
+	
+	implementation group: 'com.google.auto.service', name: 'auto-service', version: '1.1.1'
+	annotationProcessor group: 'com.google.auto.service', name: 'auto-service', version: '1.1.1'
+	
+	testImplementation 'io.toolisticon.cute:cute:1.7.0'
+	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.10.0'
+	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.10.0'
+	
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
